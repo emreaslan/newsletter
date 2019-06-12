@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<body>
+<div class="container">
+    <div class="card border-light mb-3">
+        <div class="card-header"><img class="mb-2" th:src="@{./images/newsletter.png}" alt="" width="36" height="36"> Newsletter</div>
+        <div class="card-body">
+            <h5 class="card-title">List of Subscribers</h5>
+            <p class="card-text">All subscribers are listed below.</p>
+            <a th:href="@{/add}" class="btn btn-outline-success btn-sm">Add New Subscriber</a>
+        </div>
+    </div>
+    <div class="card border-light">
+        <div class="card-block">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <!--/*@thymesVar id="subscribers" type="java.util.List"*/-->
+                <!--/*@thymesVar id="subscriber" type="newsletter.models.Subscriber"*/-->
+                <tbody>
+                <tr th:each="subscriber : ${subscribers}">
+                    <td th:text="${subscriber.name}"></td>
+                    <td th:text="${subscriber.email}"></td>
+                    <td>
+                        <a th:href="@{'/edit/' +${subscriber.id}}" class="btn btn-outline-primary btn-sm">Edit</a>
+                        <a th:href="@{'/delete/' + ${subscriber.id}}" class="btn btn-outline-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<th:block th:insert="commons/include_js::js_fragment"></th:block>
+</body>
+</html>
+
+
+

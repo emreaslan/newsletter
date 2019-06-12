@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{../webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<body>
+<!--/*@thymesVar id="subscriber" type="newsletter.models.Subscriber"*/-->
+<div class="container">
+    <div class="card border-light mb-3">
+        <div class="card-header"><img class="mb-2" th:src="@{../images/newsletter.png}" alt="" width="36" height="36"> Newsletter</div>
+        <div class="card-body">
+            <h5 class="card-title">Edit Subscriber ID #<span th:text="${subscriber.id}"></span></h5>
+            <p class="card-text">Subscriber information is listed below.</p>
+        </div>
+    </div>
+
+    <div class="card border-light">
+        <div class="card-block">
+            <form th:action="@{'/edit/' +${subscriber.id}}" method="post">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" id="name" th:field="*{subscriber.name}"/>
+                        </td>
+                        <td>
+                            <input type="email" class="form-control" id="email" th:field="*{subscriber.email}"/>
+                        </td>
+                        <td>
+                            <input type="submit" class="btn btn-outline-primary btn-sm" value="Update" />
+                            <a th:href="@{'/index'}" class="btn btn-outline-danger btn-sm">Cancel</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<th:block th:insert="commons/include_js::js_fragment"></th:block>
+</body>
+</html>
+
